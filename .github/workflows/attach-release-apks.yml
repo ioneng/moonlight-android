@@ -32,10 +32,26 @@ jobs:
           yes | sdkmanager --licenses
           sdkmanager --install "platforms;android-36" "build-tools;36.0.0" "ndk;27.0.12077973"
 
+      - name: Prepare release signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.MOONLIGHT_STATS_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.MOONLIGHT_STATS_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.MOONLIGHT_STATS_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.MOONLIGHT_STATS_KEY_PASSWORD }}
+        run: |
+          test -n "$KEYSTORE_BASE64" || { echo "Missing Moonlight Stats signing secrets"; exit 1; }
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/moonlight-stats-release.jks"
+          cat > keystore.properties <<EOF
+          storeFile=$RUNNER_TEMP/moonlight-stats-release.jks
+          storePassword=$KEYSTORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          EOF
+
       - name: Build non-root APKs
-        run: ./gradlew assembleNonRoot_gameDebug
+        run: ./gradlew assembleNonRoot_gameRelease
 
       - name: Attach APKs to the release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" app/build/outputs/apk/nonRoot_game/debug/*.apk --clobber
+        run: gh release upload "${{ github.event.release.tag_name }}" app/build/outputs/apk/nonRoot_game/release/*.apk --clobber
