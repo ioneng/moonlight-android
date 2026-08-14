@@ -75,6 +75,7 @@ public class PreferenceConfiguration {
     private static final String ENABLE_PIP_PREF_STRING = "checkbox_enable_pip";
     private static final String ENABLE_PERF_OVERLAY_STRING = "checkbox_enable_perf_overlay";
     private static final String PERF_OVERLAY_STATS_STRING = "perf_overlay_stats";
+    private static final String COMPACT_PERF_OVERLAY_STRING = "checkbox_compact_perf_overlay";
     private static final String ENABLE_PERF_LOGGING = "checkbox_enable_perf_logging";
 
     public static final String PERF_OVERLAY_STAT_STREAM_DETAILS = "streamdetails";
@@ -85,6 +86,8 @@ public class PreferenceConfiguration {
     public static final String PERF_OVERLAY_STAT_NET_LATENCY = "netlatency";
     public static final String PERF_OVERLAY_STAT_HOST_PROCESSING_LATENCY = "hostprocessinglatency";
     public static final String PERF_OVERLAY_STAT_DECODE_TIME = "dectime";
+    public static final String PERF_OVERLAY_STAT_BANDWIDTH = "bandwidth";
+    public static final String PERF_OVERLAY_STAT_3D_RENDERER_DETAILS = "3drendererdetails";
 
     private static final Set<String> DEFAULT_PERF_OVERLAY_STATS = new HashSet<>(Arrays.asList(
             PERF_OVERLAY_STAT_STREAM_DETAILS,
@@ -94,7 +97,9 @@ public class PreferenceConfiguration {
             PERF_OVERLAY_STAT_NET_DROPS,
             PERF_OVERLAY_STAT_NET_LATENCY,
             PERF_OVERLAY_STAT_HOST_PROCESSING_LATENCY,
-            PERF_OVERLAY_STAT_DECODE_TIME));
+            PERF_OVERLAY_STAT_DECODE_TIME,
+            PERF_OVERLAY_STAT_BANDWIDTH,
+            PERF_OVERLAY_STAT_3D_RENDERER_DETAILS));
     private static final String BIND_ALL_USB_STRING = "checkbox_usb_bind_all";
     private static final String MOUSE_EMULATION_STRING = "checkbox_mouse_emulation";
     private static final String REMEMBER_MOUSE_MODE_PREF_STRING = "checkbox_remember_mouse_mode";
@@ -188,6 +193,7 @@ public class PreferenceConfiguration {
     private static final boolean DEFAULT_ENABLE_HDR = false;
     private static final boolean DEFAULT_ENABLE_PIP = false;
     private static final boolean DEFAULT_ENABLE_PERF_OVERLAY = false;
+    private static final boolean DEFAULT_COMPACT_PERF_OVERLAY = true;
     private static final boolean DEFAULT_PERF_OVERLAY_BOTTOM = false;
     private static final boolean DEFAULT_ENABLE_PERF_LOGGING = false;
     private static final boolean DEFAULT_BIND_ALL_USB = false;
@@ -295,6 +301,7 @@ public class PreferenceConfiguration {
     public float balance_shift;
     public boolean enablePerfOverlay;
     public Set<String> perfOverlayStats;
+    public boolean compactPerfOverlay;
     public boolean enablePerfLogging;
     //简化版性能信息
     public boolean enablePerfOverlayLite;
@@ -948,6 +955,7 @@ private static int getFramePacingValue(Context context) {
         config.enablePerfOverlay = prefs.getBoolean(ENABLE_PERF_OVERLAY_STRING, DEFAULT_ENABLE_PERF_OVERLAY);
         Set<String> perfOverlayStats = prefs.getStringSet(PERF_OVERLAY_STATS_STRING, DEFAULT_PERF_OVERLAY_STATS);
         config.perfOverlayStats = perfOverlayStats == null ? new HashSet<>() : new HashSet<>(perfOverlayStats);
+        config.compactPerfOverlay = prefs.getBoolean(COMPACT_PERF_OVERLAY_STRING, DEFAULT_COMPACT_PERF_OVERLAY);
         config.enablePerfLogging = prefs.getBoolean(ENABLE_PERF_LOGGING, DEFAULT_ENABLE_PERF_LOGGING);
         config.enablePerfOverlayLite = prefs.getBoolean("checkbox_enable_perf_overlay_lite",DEFAULT_ENABLE_PERF_OVERLAY);
         config.enablePerfOverlayBottom = prefs.getBoolean("checkbox_enable_perf_overlay_bottom",DEFAULT_PERF_OVERLAY_BOTTOM);

@@ -145,6 +145,8 @@
         <item>@string/perf_overlay_stat_netlatency</item>
         <item>@string/perf_overlay_stat_hostprocessinglatency</item>
         <item>@string/perf_overlay_stat_dectime</item>
+        <item>@string/perf_overlay_stat_bandwidth</item>
+        <item>@string/perf_overlay_stat_3d_renderer_details</item>
     </string-array>
     <string-array name="perf_overlay_stats_values" translatable="false">
         <item>streamdetails</item>
@@ -155,6 +157,8 @@
         <item>netlatency</item>
         <item>hostprocessinglatency</item>
         <item>dectime</item>
+        <item>bandwidth</item>
+        <item>3drendererdetails</item>
     </string-array>
 
     <string-array name="analog_scrolling_names">
