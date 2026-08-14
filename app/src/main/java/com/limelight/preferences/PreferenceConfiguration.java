@@ -6,6 +6,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.Display;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.limelight.nvstream.jni.MoonBridge;
 import com.limelight.profiles.ProfilesManager;
 
@@ -70,7 +74,27 @@ public class PreferenceConfiguration {
     private static final String ENABLE_HDR_PREF_STRING = "checkbox_enable_hdr";
     private static final String ENABLE_PIP_PREF_STRING = "checkbox_enable_pip";
     private static final String ENABLE_PERF_OVERLAY_STRING = "checkbox_enable_perf_overlay";
+    private static final String PERF_OVERLAY_STATS_STRING = "perf_overlay_stats";
     private static final String ENABLE_PERF_LOGGING = "checkbox_enable_perf_logging";
+
+    public static final String PERF_OVERLAY_STAT_STREAM_DETAILS = "streamdetails";
+    public static final String PERF_OVERLAY_STAT_DECODER = "decoder";
+    public static final String PERF_OVERLAY_STAT_INCOMING_FPS = "incomingfps";
+    public static final String PERF_OVERLAY_STAT_RENDERING_FPS = "renderingfps";
+    public static final String PERF_OVERLAY_STAT_NET_DROPS = "netdrops";
+    public static final String PERF_OVERLAY_STAT_NET_LATENCY = "netlatency";
+    public static final String PERF_OVERLAY_STAT_HOST_PROCESSING_LATENCY = "hostprocessinglatency";
+    public static final String PERF_OVERLAY_STAT_DECODE_TIME = "dectime";
+
+    private static final Set<String> DEFAULT_PERF_OVERLAY_STATS = new HashSet<>(Arrays.asList(
+            PERF_OVERLAY_STAT_STREAM_DETAILS,
+            PERF_OVERLAY_STAT_DECODER,
+            PERF_OVERLAY_STAT_INCOMING_FPS,
+            PERF_OVERLAY_STAT_RENDERING_FPS,
+            PERF_OVERLAY_STAT_NET_DROPS,
+            PERF_OVERLAY_STAT_NET_LATENCY,
+            PERF_OVERLAY_STAT_HOST_PROCESSING_LATENCY,
+            PERF_OVERLAY_STAT_DECODE_TIME));
     private static final String BIND_ALL_USB_STRING = "checkbox_usb_bind_all";
     private static final String MOUSE_EMULATION_STRING = "checkbox_mouse_emulation";
     private static final String REMEMBER_MOUSE_MODE_PREF_STRING = "checkbox_remember_mouse_mode";
@@ -270,6 +294,7 @@ public class PreferenceConfiguration {
     public float convergence_ratio;
     public float balance_shift;
     public boolean enablePerfOverlay;
+    public Set<String> perfOverlayStats;
     public boolean enablePerfLogging;
     //简化版性能信息
     public boolean enablePerfOverlayLite;
@@ -921,6 +946,8 @@ private static int getFramePacingValue(Context context) {
         config.enableHdr = prefs.getBoolean(ENABLE_HDR_PREF_STRING, DEFAULT_ENABLE_HDR) && !isShieldAtvFirmwareWithBrokenHdr();
         config.enablePip = prefs.getBoolean(ENABLE_PIP_PREF_STRING, DEFAULT_ENABLE_PIP);
         config.enablePerfOverlay = prefs.getBoolean(ENABLE_PERF_OVERLAY_STRING, DEFAULT_ENABLE_PERF_OVERLAY);
+        Set<String> perfOverlayStats = prefs.getStringSet(PERF_OVERLAY_STATS_STRING, DEFAULT_PERF_OVERLAY_STATS);
+        config.perfOverlayStats = perfOverlayStats == null ? new HashSet<>() : new HashSet<>(perfOverlayStats);
         config.enablePerfLogging = prefs.getBoolean(ENABLE_PERF_LOGGING, DEFAULT_ENABLE_PERF_LOGGING);
         config.enablePerfOverlayLite = prefs.getBoolean("checkbox_enable_perf_overlay_lite",DEFAULT_ENABLE_PERF_OVERLAY);
         config.enablePerfOverlayBottom = prefs.getBoolean("checkbox_enable_perf_overlay_bottom",DEFAULT_PERF_OVERLAY_BOTTOM);
