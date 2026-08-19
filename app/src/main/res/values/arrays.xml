@@ -136,6 +136,31 @@
         <item>smoothness</item>
     </string-array>
 
+    <string-array name="perf_overlay_stats_names">
+        <item>@string/perf_overlay_stat_streamdetails</item>
+        <item>@string/perf_overlay_stat_decoder</item>
+        <item>@string/perf_overlay_stat_incomingfps</item>
+        <item>@string/perf_overlay_stat_renderingfps</item>
+        <item>@string/perf_overlay_stat_netdrops</item>
+        <item>@string/perf_overlay_stat_netlatency</item>
+        <item>@string/perf_overlay_stat_hostprocessinglatency</item>
+        <item>@string/perf_overlay_stat_dectime</item>
+        <item>@string/perf_overlay_stat_bandwidth</item>
+        <item>@string/perf_overlay_stat_3d_renderer_details</item>
+    </string-array>
+    <string-array name="perf_overlay_stats_values" translatable="false">
+        <item>streamdetails</item>
+        <item>decoder</item>
+        <item>incomingfps</item>
+        <item>renderingfps</item>
+        <item>netdrops</item>
+        <item>netlatency</item>
+        <item>hostprocessinglatency</item>
+        <item>dectime</item>
+        <item>bandwidth</item>
+        <item>3drendererdetails</item>
+    </string-array>
+
     <string-array name="analog_scrolling_names">
         <item>@string/analogscroll_none</item>
         <item>@string/analogscroll_right</item>
