@@ -46,6 +46,7 @@ public class XboxOneController extends AbstractXboxController {
             new InitPacket(0x0000, 0x0000, FW2015_INIT),
             new InitPacket(0x045e, 0x02ea, ONE_S_INIT),//Xbox Wireless Controller, HWID Model 1708
             new InitPacket(0x045e, 0x0b00, ONE_S_INIT),
+            new InitPacket(0x045e, 0x0b05, ONE_S_INIT),
             new InitPacket(0x0e6f, 0x0000, PDP_INIT1),
             new InitPacket(0x0e6f, 0x0000, PDP_INIT2),
             new InitPacket(0x24c6, 0x541a, RUMBLE_INIT1),
@@ -55,6 +56,7 @@ public class XboxOneController extends AbstractXboxController {
             new InitPacket(0x24c6, 0x542a, RUMBLE_INIT2),
             new InitPacket(0x24c6, 0x543a, RUMBLE_INIT2),
             new InitPacket(0x045e, 0x0b12, ONE_S_INIT),//Xbox Wireless Controller, HWID Model 1914
+            new InitPacket(0x045e, 0x0b13, ONE_S_INIT),
             new InitPacket(0x045e, 0x02fe, ONE_S_INIT),//Xbox Wireless Controller, HWID Model 1914
             new InitPacket(0x3537, 0x1012, ONE_S_INIT),//小鸡影舞者
 

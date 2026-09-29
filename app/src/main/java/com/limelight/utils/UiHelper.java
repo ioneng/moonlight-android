@@ -38,18 +38,21 @@ public class UiHelper {
 
     private static void setGameModeStatus(Context context, boolean streaming, boolean interruptible) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            GameManager gameManager = context.getSystemService(GameManager.class);
+            try {
+                GameManager gameManager = context.getSystemService(GameManager.class);
+                if (gameManager == null) {
+                    return; // Not supported on this device (for example Meta Quest).
+                }
 
-            if (gameManager == null) {
-                LimeLog.warning("GameManager is null, maybe your system does not support it?");
-                return;
-            }
-
-            if (streaming) {
-                gameManager.setGameState(new GameState(false, interruptible ? GameState.MODE_GAMEPLAY_INTERRUPTIBLE : GameState.MODE_GAMEPLAY_UNINTERRUPTIBLE));
-            }
-            else {
-                gameManager.setGameState(new GameState(false, GameState.MODE_NONE));
+                if (streaming) {
+                    gameManager.setGameState(new GameState(false, interruptible ? GameState.MODE_GAMEPLAY_INTERRUPTIBLE : GameState.MODE_GAMEPLAY_UNINTERRUPTIBLE));
+                }
+                else {
+                    gameManager.setGameState(new GameState(false, GameState.MODE_NONE));
+                }
+            } catch (Throwable t) {
+                // Some OEM builds expose partial/incompatible GameManager implementations.
+                LimeLog.warning("Unable to update GameManager state: " + t.getMessage());
             }
         }
     }
