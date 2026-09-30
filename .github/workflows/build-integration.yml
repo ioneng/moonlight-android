@@ -42,3 +42,5 @@ jobs:
           name: Artemis-12.2-integration-debug-APKs
           path: app/build/outputs/apk/nonRoot_game/debug/*.apk
           if-no-files-found: error
+
+# trigger integration build
